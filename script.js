@@ -39,7 +39,6 @@ function disegnaGriglia() {
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Sfondo
   ctx.fillStyle = "#e0e0e0";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -49,33 +48,36 @@ function disegnaGriglia() {
       const cy = r * cellH + cellH / 2;
       const angle = Math.random() * Math.PI * 2;
 
+      const circleRadius = Math.min(cellW, cellH) * 0.1;
+      const distance = circleRadius * 3; // distanza tra i due centri dei cerchi
+
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(angle);
 
-      // === Cerchio1 ===
+      // Primo cerchio (sinistra)
       ctx.beginPath();
       ctx.fillStyle = "#000";
-      ctx.arc(-10, -10, Math.min(cellW, cellH) * 0.15, 0, Math.PI * 2);
+      ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // === Cerchio 2 ===
+      // Secondo cerchio (destra)
       ctx.beginPath();
-      ctx.fillStyle = "#000";
-      ctx.arc(15, 0, Math.min(cellW, cellH) * 0.15, 0, Math.PI * 2);
+      ctx.arc(distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // === Rettangolo ===
+      // Rettangolo verticale che collega i centri dei cerchi
+      const rectW = Math.min(cellW, cellH) * 0.05; // spessore del rettangolo
+      const rectH = distance; // altezza = distanza tra centri
+
       ctx.fillStyle = "#000";
-      const rectW = Math.min(cellW, cellH) * 0.2;
-      const rectH = Math.min(cellW, cellH) * 0.05;
-      ctx.fillRect(-rectW / 2, 20, rectW, rectH); // posizione relativa: y = 20
+      ctx.beginPath();
+      ctx.fillRect(-rectW / 2, -distance / 2, rectW, rectH);
 
       ctx.restore();
     }
   }
 }
-
 
   window.addEventListener('resize', ridimensionaCanvas);
   ridimensionaCanvas();
