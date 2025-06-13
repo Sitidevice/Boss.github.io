@@ -42,8 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function disegnaGriglia() {
-    const cols = 20;
-    const rows = 20;
+    const cols = 15;
+    const rows = 15;
     const cellW = canvas.width / cols;
     const cellH = canvas.height / rows;
 
