@@ -38,32 +38,42 @@ document.addEventListener('DOMContentLoaded', () => {
     const cellH = canvas.height / rows;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Sfondo
     ctx.fillStyle = "#e0e0e0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    ctx.strokeStyle = "#999"; // colore della griglia visibile
+    ctx.lineWidth = 0.5;
+
+    // Disegna la griglia
+    for (let c = 0; c <= cols; c++) {
+      const x = c * cellW;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, canvas.height);
+      ctx.stroke();
+    }
+
+    for (let r = 0; r <= rows; r++) {
+      const y = r * cellH;
+      ctx.beginPath();
+      ctx.moveTo(0, y);
+      ctx.lineTo(canvas.width, y);
+      ctx.stroke();
+    }
+
+    // Disegna una circonferenza nera al centro di ogni cella
     ctx.fillStyle = "#000";
+    const radius = Math.min(cellW, cellH) * 0.15;
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
-        const x = c * cellW;
-        const y = r * cellH;
-
-        // 3 cerchi neri pieni (disposti in diagonale)
-        for (let i = 0; i < 3; i++) {
-          const cx = x + (cellW * 0.25) * (i + 1);
-          const cy = y + cellH * 0.25;
-          const radius = Math.min(cellW, cellH) * 0.05;
-          ctx.beginPath();
-          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
-          ctx.fill();
-        }
-
-        // Rettangolo nero pieno in basso
-        const rw = cellW * 0.4;
-        const rh = cellH * 0.15;
-        const rx = x + (cellW - rw) / 2;
-        const ry = y + cellH * 0.65;
-        ctx.fillRect(rx, ry, rw, rh);
+        const cx = c * cellW + cellW / 2;
+        const cy = r * cellH + cellH / 2;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
   }
