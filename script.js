@@ -38,7 +38,6 @@ function disegnaGriglia() {
   const cellH = canvas.height / rows;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
   ctx.fillStyle = "#e0e0e0";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -48,8 +47,10 @@ function disegnaGriglia() {
       const cy = r * cellH + cellH / 2;
       const angle = Math.random() * Math.PI * 2;
 
-      const circleRadius = Math.min(cellW, cellH) * 0.1;
-      const distance = circleRadius * 3; // distanza tra i due centri dei cerchi
+      const circleRadius = Math.min(cellW, cellH) * 0.15;
+      const distance = circleRadius * 2.5; // distanza tra i centri dei cerchi
+      const rectHeight = circleRadius * 4;
+      const rectWidth = distance;
 
       ctx.save();
       ctx.translate(cx, cy);
@@ -57,7 +58,7 @@ function disegnaGriglia() {
 
       // Primo cerchio (sinistra)
       ctx.beginPath();
-      ctx.fillStyle = "#000";
+      ctx.fillStyle = "orange";
       ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
@@ -66,18 +67,16 @@ function disegnaGriglia() {
       ctx.arc(distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // Rettangolo verticale che collega i centri dei cerchi
-      const rectW = Math.min(cellW, cellH) * 0.05; // spessore del rettangolo
-      const rectH = distance; // altezza = distanza tra centri
-
+      // Rettangolo (parte dal centro dei cerchi verso l'alto)
       ctx.fillStyle = "#000";
       ctx.beginPath();
-      ctx.fillRect(-rectW / 2, -distance / 2, rectW, rectH);
+      ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
       ctx.restore();
     }
   }
 }
+
 
   window.addEventListener('resize', ridimensionaCanvas);
   ridimensionaCanvas();
