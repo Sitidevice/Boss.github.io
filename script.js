@@ -31,48 +31,51 @@ document.addEventListener('DOMContentLoaded', () => {
     disegnaGriglia();
   }
 
-  function disegnaGriglia() {
-    const cols = 10;
-    const rows = 20;
-    const cellW = canvas.width / cols;
-    const cellH = canvas.height / rows;
+function disegnaGriglia() {
+  const cols = 20;
+  const rows = 20;
+  const cellW = canvas.width / cols;
+  const cellH = canvas.height / rows;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Sfondo grigio chiaro
-    ctx.fillStyle = "#e0e0e0";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  // Sfondo
+  ctx.fillStyle = "#e0e0e0";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.fillStyle = "#000";
-    const radius = Math.min(cellW, cellH) * 0.3;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const cx = c * cellW + cellW / 2;
+      const cy = r * cellH + cellH / 2;
+      const angle = Math.random() * Math.PI * 2;
 
-    for (let r = 0; r < rows; r++) {
-      for (let c = 0; c < cols; c++) {
-        const cx = c * cellW + cellW / 2;
-        const cy = r * cellH + cellH / 2;
-        const angle = Math.random() * Math.PI * 2;
+      ctx.save();
+      ctx.translate(cx, cy);
+      ctx.rotate(angle);
 
-        ctx.save();               // Salva stato
-        ctx.translate(cx, cy);    // Trasla al centro
-        ctx.rotate(angle);        // Rotazione casuale
+      // === Cerchio1 ===
+      ctx.beginPath();
+      ctx.fillStyle = "#000";
+      ctx.arc(-10, -10, Math.min(cellW, cellH) * 0.15, 0, Math.PI * 2);
+      ctx.fill();
 
-        // Cerchio nero
-        ctx.beginPath();
-        ctx.arc(0, 0, radius, 0, Math.PI * 2);
-        ctx.fill();
+      // === Cerchio 2 ===
+      ctx.beginPath();
+      ctx.fillStyle = "#000";
+      ctx.arc(15, 0, Math.min(cellW, cellH) * 0.15, 0, Math.PI * 2);
+      ctx.fill();
 
-        // Linea bianca interna
-        ctx.strokeStyle = "#ffffff";
-        ctx.lineWidth = 2;
-        ctx.beginPath();
-        ctx.moveTo(0, 0);
-        ctx.lineTo(radius, 0);
-        ctx.stroke();
+      // === Rettangolo ===
+      ctx.fillStyle = "#000";
+      const rectW = Math.min(cellW, cellH) * 0.2;
+      const rectH = Math.min(cellW, cellH) * 0.05;
+      ctx.fillRect(-rectW / 2, 20, rectW, rectH); // posizione relativa: y = 20
 
-        ctx.restore();            // Ripristina stato
-      }
+      ctx.restore();
     }
   }
+}
+
 
   window.addEventListener('resize', ridimensionaCanvas);
   ridimensionaCanvas();
