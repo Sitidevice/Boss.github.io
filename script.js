@@ -41,8 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function disegnaGriglia() {
-    const cols = 20;
-    const rows = 20;
+    const cols = 10;
+    const rows = 10;
     const cellW = canvas.width / cols;
     const cellH = canvas.height / rows;
 
@@ -71,12 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cerchio sinistro
         ctx.beginPath();
         ctx.fillStyle = "black";
-        ctx.arc(-distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
+        ctx.arc(-distance / 1.5, 0, circleRadius, 0, Math.PI * 2);
         ctx.fill();
 
         // Cerchio destro
         ctx.beginPath();
-        ctx.arc(distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
+        ctx.arc(distance / 1.5, 0, circleRadius, 0, Math.PI * 2);
         ctx.fill();
 
         // Rettangolo centrale (centrato, base tra i due cerchi)
