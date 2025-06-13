@@ -48,7 +48,7 @@ function disegnaGriglia() {
       const angle = Math.random() * Math.PI * 2;
 
       const circleRadius = Math.min(cellW, cellH) * 0.15;
-      const distance = circleRadius * 2.5; // distanza tra i centri dei cerchi
+      const distance = circleRadius * 1; // distanza tra i centri dei cerchi
       const rectHeight = circleRadius * 4;
       const rectWidth = distance;
 
@@ -58,7 +58,7 @@ function disegnaGriglia() {
 
       // Primo cerchio (sinistra)
       ctx.beginPath();
-      ctx.fillStyle = "orange";
+      ctx.fillStyle = "black";
       ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
