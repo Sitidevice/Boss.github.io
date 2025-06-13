@@ -25,6 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
 
+  let mouseX = 0;
+  let mouseY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    disegnaGriglia();
+  });
+
   function ridimensionaCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -41,76 +50,52 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = "#e0e0e0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+    const circleRadius = Math.min(cellW, cellH) * 0.20;
+    const distance = circleRadius * 2.5;
+    const rectWidth = distance;
+    const rectHeight = circleRadius * 4;
+
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const cx = c * cellW + cellW / 2;
         const cy = r * cellH + cellH / 2;
-        elementi.push({ cx, cy });
+
+        const dx = mouseX - cx;
+        const dy = mouseY - cy;
+        const angle = Math.atan2(dy, dx) - Math.PI / 2;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+
+        // Cerchio sinistro
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.arc(-distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cerchio destro
+        ctx.beginPath();
+        ctx.arc(distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Rettangolo centrale (centrato, base tra i due cerchi)
+        ctx.fillStyle = "black";
+        ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
+
+        // Cerchio superiore (centrato sopra il rettangolo)
+        const thirdCircleRadius = rectWidth / 2;
+        const thirdCircleY = -rectHeight;
+
+        ctx.beginPath();
+        ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
       }
     }
   }
 
-  const elementi = [];
-  let mouseX = 0;
-  let mouseY = 0;
-
-  canvas.addEventListener('mousemove', e => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#e0e0e0";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    const circleRadius = 10;
-    const distance = circleRadius * 2; // distanza tra i centri dei due cerchi
-    const rectWidth = distance;
-    const rectHeight = circleRadius * 2.5; // ridotto di circa 1/3
-
-    for (const { cx, cy } of elementi) {
-      const dx = mouseX - cx;
-      const dy = mouseY - cy;
-      const angle = Math.atan2(dy, dx) + Math.PI; // punta opposta al mouse
-
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(angle);
-
-      // Cerchio sinistro
-      ctx.beginPath();
-      ctx.fillStyle = "black";
-      ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Cerchio destro
-      ctx.beginPath();
-      ctx.arc(distance / 2, 0, circleRadius, 0, Math.PI * 2);
-      ctx.fill();
-
-      // Rettangolo centrale
-      ctx.fillStyle = "black";
-      ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
-
-      // Cerchio superiore
-      const thirdCircleRadius = rectWidth / 2;
-      const thirdCircleY = -rectHeight;
-      ctx.beginPath();
-      ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.restore();
-    }
-
-    requestAnimationFrame(animate);
-  }
-
-  window.addEventListener('resize', () => {
-    elementi.length = 0;
-    ridimensionaCanvas();
-  });
-
+  window.addEventListener('resize', ridimensionaCanvas);
   ridimensionaCanvas();
-  animate();
 });
