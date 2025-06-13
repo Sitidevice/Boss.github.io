@@ -1,0 +1,37 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0; /* Un leggero sfondo grigio */
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Evita scroll indesiderati */
+}
+
+.container {
+    text-align: center;
+}
+
+#sticker {
+    cursor: pointer;
+    max-width: 300px; /* Imposta una dimensione massima per lo sticker */
+    height: auto;
+    transition: transform 0.1s ease-in-out; /* Effetto al click */
+}
+
+#sticker:active {
+    transform: scale(0.95); /* Rimpicciolisce leggermente al click */
+}
+
+#fraseEsclamata {
+    margin-top: 20px;
+    font-size: 4.5em;
+    color: #333;
+    opacity: 0; /* Inizialmente nascosta */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#fraseEsclamata.mostra {
+    opacity: 1; /* Mostra la frase */
+}
