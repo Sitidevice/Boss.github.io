@@ -59,12 +59,12 @@ function disegnaGriglia() {
       // Cerchio sinistro
       ctx.beginPath();
       ctx.fillStyle = "black";
-      ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
+      ctx.arc(-distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
       // Cerchio destro
       ctx.beginPath();
-      ctx.arc(distance / 2, 0, circleRadius, 0, Math.PI * 2);
+      ctx.arc(distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
       // Rettangolo (verticale, base tra i due cerchi)
