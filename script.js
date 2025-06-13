@@ -58,7 +58,7 @@ function disegnaGriglia() {
 
       // Cerchio sinistro
       ctx.beginPath();
-      ctx.fillStyle = "orange";
+      ctx.fillStyle = "black";
       ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
@@ -73,10 +73,10 @@ function disegnaGriglia() {
 
       // Terzo cerchio in alto, centrato, con diametro = larghezza rettangolo
       const thirdCircleRadius = rectWidth / 2;
-      const thirdCircleY = -rectHeight - thirdCircleRadius; // centrato sopra il rettangolo
+      const thirdCircleY = -rectHeight; // centro sulla base superiore
 
       ctx.beginPath();
-      ctx.fillStyle = "orange";
+      ctx.fillStyle = "black";
       ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
       ctx.fill();
 
