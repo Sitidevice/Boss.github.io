@@ -48,34 +48,43 @@ function disegnaGriglia() {
       const angle = Math.random() * Math.PI * 2;
 
       const circleRadius = Math.min(cellW, cellH) * 0.15;
-      const distance = circleRadius * 2; // distanza tra i centri dei cerchi
-      const rectHeight = circleRadius * 2;
+      const distance = circleRadius * 2.5;
       const rectWidth = distance;
+      const rectHeight = circleRadius * 4;
 
       ctx.save();
       ctx.translate(cx, cy);
       ctx.rotate(angle);
 
-      // Primo cerchio (sinistra)
+      // Cerchio sinistro
       ctx.beginPath();
-      ctx.fillStyle = "black";
+      ctx.fillStyle = "orange";
       ctx.arc(-distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // Secondo cerchio (destra)
+      // Cerchio destro
       ctx.beginPath();
       ctx.arc(distance / 2, 0, circleRadius, 0, Math.PI * 2);
       ctx.fill();
 
-      // Rettangolo (parte dal centro dei cerchi verso l'alto)
+      // Rettangolo (verticale, base tra i due cerchi)
       ctx.fillStyle = "#000";
-      ctx.beginPath();
       ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
+
+      // Terzo cerchio in alto, centrato, con diametro = larghezza rettangolo
+      const thirdCircleRadius = rectWidth / 2;
+      const thirdCircleY = -rectHeight - thirdCircleRadius; // centrato sopra il rettangolo
+
+      ctx.beginPath();
+      ctx.fillStyle = "orange";
+      ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
+      ctx.fill();
 
       ctx.restore();
     }
   }
 }
+
 
 
   window.addEventListener('resize', ridimensionaCanvas);
