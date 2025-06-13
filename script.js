@@ -47,7 +47,7 @@ function disegnaGriglia() {
       const cy = r * cellH + cellH / 2;
       const angle = Math.random() * Math.PI * 2;
 
-      const circleRadius = Math.min(cellW, cellH) * 0.15;
+      const circleRadius = Math.min(cellW, cellH) * 0.20;
       const distance = circleRadius * 2.5;
       const rectWidth = distance;
       const rectHeight = circleRadius * 4;
