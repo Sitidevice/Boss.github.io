@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sticker.addEventListener('click', () => {
     fraseEsclamata.textContent = frasi[indiceFraseCorrente];
     fraseEsclamata.classList.add('mostra');
+    fraseEsclamata.style.backgroundColor = 'white'; // Sfondo bianco per la label
     indiceFraseCorrente = (indiceFraseCorrente + 1) % frasi.length;
 
     setTimeout(() => {
@@ -41,8 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function disegnaGriglia() {
-    const cols = 10;
-    const rows = 10;
+    const cols = 20;
+    const rows = 20;
     const cellW = canvas.width / cols;
     const cellH = canvas.height / rows;
 
@@ -50,10 +51,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.fillStyle = "#e0e0e0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const circleRadius = Math.min(cellW, cellH) * 0.20;
-    const distance = circleRadius * 2.5;
+    const baseCircleRadius = Math.min(cellW, cellH) * 0.25; // più grande
+    const distance = baseCircleRadius * 2; // estremità coincidenti
     const rectWidth = distance;
-    const rectHeight = circleRadius * 4;
+    const rectHeight = baseCircleRadius * 4;
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
@@ -62,24 +63,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const dx = mouseX - cx;
         const dy = mouseY - cy;
-        const angle = Math.atan2(dy, dx) - Math.PI / 2;
+        const angle = Math.atan2(dy, dx) + Math.PI / 2; // invertita
 
         ctx.save();
         ctx.translate(cx, cy);
-        ctx.rotate(-angle);
+        ctx.rotate(angle);
 
         // Cerchio sinistro
         ctx.beginPath();
         ctx.fillStyle = "black";
-        ctx.arc(-distance / 1.5, 0, circleRadius, 0, Math.PI * 2);
+        ctx.arc(-distance / 2, 0, baseCircleRadius, 0, Math.PI * 2);
         ctx.fill();
 
         // Cerchio destro
         ctx.beginPath();
-        ctx.arc(distance / 1.5, 0, circleRadius, 0, Math.PI * 2);
+        ctx.arc(distance / 2, 0, baseCircleRadius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Rettangolo centrale (centrato, base tra i due cerchi)
+        // Rettangolo centrale (verticale)
         ctx.fillStyle = "black";
         ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
