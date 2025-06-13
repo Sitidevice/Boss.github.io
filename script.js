@@ -1,39 +1,73 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const sticker = document.getElementById('sticker');
-    const fraseEsclamata = document.getElementById('fraseEsclamata');
+  const sticker = document.getElementById('sticker');
+  const fraseEsclamata = document.getElementById('fraseEsclamata');
+  const canvas = document.getElementById('sfondoCanvas');
+  const ctx = canvas.getContext('2d');
 
-    // Array delle frasi nell'ordine esatto che desideri
-    const frasi = [
-        "Antonièèèèè",
-        "Che ci vuole a farlo?",
-        "Questa cosa puzza!",
-        "È urgente!",
-        "Hai fatto?",
-        "Dove sta Francesco?",
-        "Torniamo a bomba!"
-    ];
+  const frasi = [
+    "Antonièèèèè",
+    "Che ci vuole a farlo?",
+    "Questa cosa puzza!",
+    "È urgente!",
+    "Hai fatto?",
+    "Dove sta Francesco?",
+    "Torniamo a bomba!"
+  ];
+  let indiceFraseCorrente = 0;
 
-    let indiceFraseCorrente = 0; // Inizia dalla prima frase (indice 0)
+  sticker.addEventListener('click', () => {
+    fraseEsclamata.textContent = frasi[indiceFraseCorrente];
+    fraseEsclamata.classList.add('mostra');
+    indiceFraseCorrente = (indiceFraseCorrente + 1) % frasi.length;
 
-    sticker.addEventListener('click', () => {
-        // Ottieni la frase corrente dall'array usando l'indice
-        const fraseDaMostrare = frasi[indiceFraseCorrente];
+    setTimeout(() => {
+      fraseEsclamata.classList.remove('mostra');
+    }, 2000);
+  });
 
-        // Aggiorna il testo e mostra la frase
-        fraseEsclamata.textContent = fraseDaMostrare;
-        fraseEsclamata.classList.add('mostra');
+  function ridimensionaCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    disegnaGriglia();
+  }
 
-        // Incrementa l'indice per passare alla prossima frase al click successivo
-        indiceFraseCorrente++;
+  function disegnaGriglia() {
+    const cols = 100;
+    const rows = 100;
+    const cellW = canvas.width / cols;
+    const cellH = canvas.height / rows;
 
-        // Se l'indice supera la lunghezza dell'array, torna all'inizio
-        if (indiceFraseCorrente >= frasi.length) {
-            indiceFraseCorrente = 0; // Ricomincia dalla prima frase dopo aver mostrato l'ultima
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#e0e0e0";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#000";
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const x = c * cellW;
+        const y = r * cellH;
+
+        // 3 cerchi neri pieni (disposti in diagonale)
+        for (let i = 0; i < 3; i++) {
+          const cx = x + (cellW * 0.25) * (i + 1);
+          const cy = y + cellH * 0.25;
+          const radius = Math.min(cellW, cellH) * 0.05;
+          ctx.beginPath();
+          ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+          ctx.fill();
         }
 
-        // Nasconde la frase dopo un periodo di tempo (2 secondi)
-        setTimeout(() => {
-            fraseEsclamata.classList.remove('mostra');
-        }, 2000); // La frase scompare dopo 2000 millisecondi (2 secondi)
-    });
+        // Rettangolo nero pieno in basso
+        const rw = cellW * 0.4;
+        const rh = cellH * 0.15;
+        const rx = x + (cellW - rw) / 2;
+        const ry = y + cellH * 0.65;
+        ctx.fillRect(rx, ry, rw, rh);
+      }
+    }
+  }
+
+  window.addEventListener('resize', ridimensionaCanvas);
+  ridimensionaCanvas();
 });
