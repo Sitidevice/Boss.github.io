@@ -39,41 +39,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Sfondo
+    // Sfondo grigio chiaro
     ctx.fillStyle = "#e0e0e0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = "#999"; // colore della griglia visibile
-    ctx.lineWidth = 0.5;
-
-    // Disegna la griglia
-    for (let c = 0; c <= cols; c++) {
-      const x = c * cellW;
-      ctx.beginPath();
-      ctx.moveTo(x, 0);
-      ctx.lineTo(x, canvas.height);
-      ctx.stroke();
-    }
-
-    for (let r = 0; r <= rows; r++) {
-      const y = r * cellH;
-      ctx.beginPath();
-      ctx.moveTo(0, y);
-      ctx.lineTo(canvas.width, y);
-      ctx.stroke();
-    }
-
-    // Disegna una circonferenza nera al centro di ogni cella
     ctx.fillStyle = "#000";
-    const radius = Math.min(cellW, cellH) * 0.15;
+    const radius = Math.min(cellW, cellH) * 0.3;
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
         const cx = c * cellW + cellW / 2;
         const cy = r * cellH + cellH / 2;
+        const angle = Math.random() * Math.PI * 2;
+
+        ctx.save();               // Salva stato
+        ctx.translate(cx, cy);    // Trasla al centro
+        ctx.rotate(angle);        // Rotazione casuale
+
+        // Cerchio nero
         ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.arc(0, 0, radius, 0, Math.PI * 2);
         ctx.fill();
+
+        // Linea bianca interna
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(radius, 0);
+        ctx.stroke();
+
+        ctx.restore();            // Ripristina stato
       }
     }
   }
