@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Rettangolo centrale
       ctx.fillStyle = "black";
-      ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
+      ctx.fillRect(-rectWidth / 2, -rectHeight /1.2, rectWidth, rectHeight);
 
       // Cerchio superiore
       const thirdCircleRadius = rectWidth / 2;
