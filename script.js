@@ -49,7 +49,7 @@ function disegnaGriglia() {
 
       const circleRadius = Math.min(cellW, cellH) * 0.15;
       const distance = circleRadius * 2; // distanza tra i centri dei cerchi
-      const rectHeight = circleRadius * 4;
+      const rectHeight = circleRadius * 2;
       const rectWidth = distance;
 
       ctx.save();
