@@ -25,75 +25,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2000);
   });
 
-  let mouseX = window.innerWidth / 2;
-  let mouseY = window.innerHeight / 2;
+  let mouseX = 0;
+  let mouseY = 0;
 
-  canvas.addEventListener('mousemove', (e) => {
+  document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
+    disegnaGriglia();
   });
 
   function ridimensionaCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    disegnaGriglia();
   }
 
-  function disegnaBloccoRotante(ctx, x, y, mouseX, mouseY) {
-    const circleRadius = 20;
-    const distance = circleRadius * 2.5;
-    const rectWidth = distance;
-    const rectHeight = circleRadius * 4;
+  function disegnaGriglia() {
+    const cols = 20;
+    const rows = 20;
+    const cellW = canvas.width / cols;
+    const cellH = canvas.height / rows;
 
-    // Centro del blocco (x, y) — rimane fisso
-    // Calcolo centro del cerchio superiore (per ottenere direzione verso mouse)
-    const verticeX = x;
-    const verticeY = y - rectHeight;
-
-    const dx = mouseX - verticeX;
-    const dy = mouseY - verticeY;
-    const angle = Math.atan2(dy, dx);
-
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.rotate(angle);
-
-    // Cerchio sinistro (alla base)
-    ctx.beginPath();
-    ctx.fillStyle = "black";
-    ctx.arc(-distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Cerchio destro (alla base)
-    ctx.beginPath();
-    ctx.arc(distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Rettangolo verticale
-    ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
-
-    // Cerchio superiore (sopra rettangolo)
-    ctx.beginPath();
-    ctx.arc(0, -rectHeight, rectWidth / 2, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.restore();
-  }
-
-  function animazione() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = "#e0e0e0";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    const centroX = canvas.width / 2;
-    const centroY = canvas.height / 2;
+    const circleRadius = Math.min(cellW, cellH) * 0.20;
+    const distance = circleRadius * 2.5;
+    const rectWidth = distance;
+    const rectHeight = circleRadius * 4;
 
-    disegnaBloccoRotante(ctx, centroX, centroY, mouseX, mouseY);
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const cx = c * cellW + cellW / 2;
+        const cy = r * cellH + cellH / 2;
 
-    requestAnimationFrame(animazione);
+        const dx = mouseX - cx;
+        const dy = mouseY - cy;
+        const angle = Math.atan2(dy, dx) - Math.PI / 2;
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(angle);
+
+        // Cerchio sinistro
+        ctx.beginPath();
+        ctx.fillStyle = "black";
+        ctx.arc(-distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Cerchio destro
+        ctx.beginPath();
+        ctx.arc(distance / 1.8, 0, circleRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Rettangolo centrale (centrato, base tra i due cerchi)
+        ctx.fillStyle = "black";
+        ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
+
+        // Cerchio superiore (centrato sopra il rettangolo)
+        const thirdCircleRadius = rectWidth / 2;
+        const thirdCircleY = -rectHeight;
+
+        ctx.beginPath();
+        ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.restore();
+      }
+    }
   }
 
   window.addEventListener('resize', ridimensionaCanvas);
   ridimensionaCanvas();
-
-  animazione();
 });
