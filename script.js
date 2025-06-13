@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Rettangolo verticale
     ctx.fillStyle = "black";
-    ctx.fillRect(-rectWidth / 2, -rectHeight / 1.3, rectWidth, rectHeight);
+    ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
     // Terzo cerchio superiore
     const thirdCircleRadius = rectWidth / 2;
