@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.save();
         ctx.translate(cx, cy);
-        ctx.rotate(angle);
+        ctx.rotate(-angle);
 
         // Cerchio sinistro
         ctx.beginPath();
