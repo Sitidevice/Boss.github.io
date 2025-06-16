@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   const frasi = [
-    Antonièèèèè",
+    "Antonièèèèè",
     "Che ci vuole a farlo?",
     "Questa cosa puzza!💩",
     "È urgente!",
