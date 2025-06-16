@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getAngle(cx, cy, mx, my) {
-    return Math.atan2(my - cy, mx - cx); // angolo corretto: punta superiore verso mouse
+    return Math.atan2(my - cy, mx - cx); // punta superiore verso il mouse
   }
 
   function drawBlock(cx, cy, angle) {
@@ -43,28 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
     const bigCircleRadius = 15;
     const distance = bigCircleRadius * 2;
     const rectWidth = distance;
-    const rectHeight = bigCircleRadius * 2.66; // leggermente allungato
+    const rectHeight = bigCircleRadius * 2.66; // rettangolo leggermente allungato
+
+    // Cerchio superiore (punta verso il mouse)
+    const thirdCircleRadius = rectWidth / 2;
+    ctx.beginPath();
+    ctx.arc(0, -rectHeight, thirdCircleRadius, 0, Math.PI * 2);
+    ctx.fillStyle = "black";
+    ctx.fill();
+
+    // Rettangolo centrale
+    ctx.fillStyle = "black";
+    ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
     // Cerchio sinistro (inferiore)
     ctx.beginPath();
-    ctx.fillStyle = "black";
     ctx.arc(-distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
     // Cerchio destro (inferiore)
     ctx.beginPath();
     ctx.arc(distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Rettangolo verticale
-    ctx.fillStyle = "black";
-    ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
-
-    // Terzo cerchio superiore
-    const thirdCircleRadius = rectWidth / 2;
-    const thirdCircleY = -rectHeight;
-    ctx.beginPath();
-    ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.restore();
