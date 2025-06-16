@@ -7,18 +7,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const frasi = [
     "Antonièèèèè",
     "Che ci vuole a farlo?",
-    "Questa cosa puzza!💩",
+    "Questa cosa puzza!",
     "È urgente!",
     "Hai fatto?",
     "Dove sta Francesco?",
-    "Torniamo a bomba!",
-    "Etchiù Etchiù Etchiù",
-    "Che ci vuole a farlo!",
-    "Facciamo una cosa figa",
-    "Torniamo a bomba",
-    "+39 348 370 0731 Chiama quando vuoi"
-    "👍",
-    "Ok",
+    "Torniamo a bomba!"
   ];
   let indiceFraseCorrente = 0;
 
@@ -50,21 +43,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const bigCircleRadius = 15;
     const distance = bigCircleRadius * 2;
     const rectWidth = distance;
-    const rectHeight = bigCircleRadius * 2.66; // rettangolo leggermente allungato
+    const rectHeight = bigCircleRadius * 2.66; // rettangolo allungato
 
-    // Cerchio superiore (punta verso il mouse)
-    const thirdCircleRadius = rectWidth / 2;
-    ctx.beginPath();
-    ctx.arc(0, -rectHeight, thirdCircleRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "black";
-    ctx.fill();
-
-    // Rettangolo centrale
+    // Rettangolo verticale
     ctx.fillStyle = "black";
     ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
+    // Terzo cerchio superiore
+    const thirdCircleRadius = rectWidth / 2;
+    const thirdCircleY = -rectHeight;
+    ctx.beginPath();
+    ctx.arc(0, thirdCircleY, thirdCircleRadius, 0, Math.PI * 2);
+    ctx.fill();
+
     // Cerchio sinistro (inferiore)
     ctx.beginPath();
+    ctx.fillStyle = "black";
     ctx.arc(-distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
