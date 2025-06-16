@@ -18,7 +18,6 @@ document.addEventListener('DOMContentLoaded', () => {
   sticker.addEventListener('click', () => {
     fraseEsclamata.textContent = frasi[indiceFraseCorrente];
     fraseEsclamata.classList.add('mostra');
-    fraseEsclamata.style.backgroundColor = "white";
     indiceFraseCorrente = (indiceFraseCorrente + 1) % frasi.length;
 
     setTimeout(() => {
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getAngle(cx, cy, mx, my) {
-    return Math.atan2(my - cy, mx - cx); // direzione verso il mouse
+    return Math.atan2(my - cy, mx - cx); // corretto: punta verso il mouse
   }
 
   function drawBlock(cx, cy, angle) {
@@ -40,14 +39,10 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.translate(cx, cy);
     ctx.rotate(angle);
 
-    const bigCircleRadius = 18; // aumentato
+    const bigCircleRadius = 15;
     const distance = bigCircleRadius * 2;
     const rectWidth = distance;
     const rectHeight = bigCircleRadius * 3; // allungato
-
-    // Rettangolo verticale
-    ctx.fillStyle = "black";
-    ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
     // Cerchio sinistro
     ctx.beginPath();
@@ -60,7 +55,11 @@ document.addEventListener('DOMContentLoaded', () => {
     ctx.arc(distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Cerchio superiore che punta verso il mouse
+    // Rettangolo verticale
+    ctx.fillStyle = "black";
+    ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
+
+    // Terzo cerchio superiore
     const thirdCircleRadius = rectWidth / 2;
     const thirdCircleY = -rectHeight;
     ctx.beginPath();
