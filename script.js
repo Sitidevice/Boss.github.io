@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   sticker.addEventListener('click', () => {
     fraseEsclamata.textContent = frasi[indiceFraseCorrente];
     fraseEsclamata.classList.add('mostra');
+    fraseEsclamata.style.backgroundColor = "white";
     indiceFraseCorrente = (indiceFraseCorrente + 1) % frasi.length;
 
     setTimeout(() => {
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getAngle(cx, cy, mx, my) {
-    return Math.atan2(my - cy, mx - cx); // corretto: punta verso il mouse
+    return Math.atan2(my - cy, mx - cx); // angolo corretto: punta superiore verso mouse
   }
 
   function drawBlock(cx, cy, angle) {
@@ -42,15 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const bigCircleRadius = 15;
     const distance = bigCircleRadius * 2;
     const rectWidth = distance;
-    const rectHeight = bigCircleRadius * 3; // allungato
+    const rectHeight = bigCircleRadius * 2.66; // leggermente allungato
 
-    // Cerchio sinistro
+    // Cerchio sinistro (inferiore)
     ctx.beginPath();
     ctx.fillStyle = "black";
     ctx.arc(-distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Cerchio destro
+    // Cerchio destro (inferiore)
     ctx.beginPath();
     ctx.arc(distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
