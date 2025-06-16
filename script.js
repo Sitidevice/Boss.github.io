@@ -5,13 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
 
   const frasi = [
-    "Antonièèèèè",
+    Antonièèèèè",
     "Che ci vuole a farlo?",
-    "Questa cosa puzza!",
+    "Questa cosa puzza!💩",
     "È urgente!",
     "Hai fatto?",
     "Dove sta Francesco?",
-    "Torniamo a bomba!"
+    "Torniamo a bomba!",
+    "Etchiù Etchiù Etchiù",
+    "Che ci vuole a farlo!",
+    "Facciamo una cosa figa",
+    "Torniamo a bomba",
+    "+39 348 370 0731 Chiama quando vuoi"
+    "👍",
+    "Ok"
   ];
   let indiceFraseCorrente = 0;
 
