@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       fraseEsclamata.classList.remove('mostra');
-    }, 2000);
+    }, 4000);
   });
 
   function ridimensionaCanvas() {
