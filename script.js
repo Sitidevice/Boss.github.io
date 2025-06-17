@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
     "A che ora ci vediamo da Cicciotto",
     "A che stai?",
     "Tu che stai facendo?"
-  
   ];
   let indiceFraseCorrente = 0;
 
@@ -79,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawAllBlocks(mouseX, mouseY) {
-    const cols = 5;
-    const rows = 5;
+    const blockSize = 100; // dimensione base del blocco
+    const cols = Math.max(1, Math.floor(canvas.width / blockSize));
+    const rows = Math.max(1, Math.floor(canvas.height / blockSize));
     const cellW = canvas.width / cols;
     const cellH = canvas.height / rows;
 
