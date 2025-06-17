@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     "Siete felici?",
     "Uomo!",
     "Giulièèè",
-    "Torniamo a bomba!"
+    "Torniamo a bomba!",
     "A che ora ci vediamo da Cicciotto",
     "A che stai?",
     "Tu che stai facendo?"
