@@ -71,8 +71,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawAllBlocks(mouseX, mouseY) {
-    const cols = 10;
-    const rows = 10;
+    const cols = 5;
+    const rows = 5;
     const cellW = canvas.width / cols;
     const cellH = canvas.height / rows;
 
