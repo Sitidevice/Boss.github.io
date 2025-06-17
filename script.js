@@ -33,13 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
   });
 
+  let cols = 5;
+  let rows = 5;
+
   function ridimensionaCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+
+    const blockSize = 100; // dimensione base
+    cols = Math.max(1, Math.floor(canvas.width / blockSize));
+    rows = Math.max(1, Math.floor(canvas.height / blockSize));
   }
 
   function getAngle(cx, cy, mx, my) {
-    return Math.atan2(my - cy, mx - cx); // angolo corretto: punta superiore verso mouse
+    return Math.atan2(my - cy, mx - cx);
   }
 
   function drawBlock(cx, cy, angle) {
@@ -50,24 +57,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const bigCircleRadius = 15;
     const distance = bigCircleRadius * 2;
     const rectWidth = distance;
-    const rectHeight = bigCircleRadius * 2.66; // leggermente allungato
+    const rectHeight = bigCircleRadius * 2.66;
 
-    // Cerchio sinistro (inferiore)
     ctx.beginPath();
     ctx.fillStyle = "black";
     ctx.arc(-distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Cerchio destro (inferiore)
     ctx.beginPath();
     ctx.arc(distance / 2, 0, bigCircleRadius, 0, Math.PI * 2);
     ctx.fill();
 
-    // Rettangolo verticale
     ctx.fillStyle = "black";
     ctx.fillRect(-rectWidth / 2, -rectHeight, rectWidth, rectHeight);
 
-    // Terzo cerchio superiore
     const thirdCircleRadius = rectWidth / 2;
     const thirdCircleY = -rectHeight;
     ctx.beginPath();
@@ -78,9 +81,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function drawAllBlocks(mouseX, mouseY) {
-    const blockSize = 100; // dimensione base del blocco
-    const cols = Math.max(1, Math.floor(canvas.width / blockSize));
-    const rows = Math.max(1, Math.floor(canvas.height / blockSize));
     const cellW = canvas.width / cols;
     const cellH = canvas.height / rows;
 
