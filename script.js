@@ -11,7 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
     "È urgente!",
     "Hai fatto?",
     "Dove sta Francesco?",
+    "Bimbi belli, come state?!",
+    "Siete felici?",
+    "Uomo!",
+    "Giulièèè",
     "Torniamo a bomba!"
+    "A che ora ci vediamo da Cicciotto",
+    "A che stai?",
+    "Tu che stai facendo?",
+  
   ];
   let indiceFraseCorrente = 0;
 
