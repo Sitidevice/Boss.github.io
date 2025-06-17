@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const blockSize = 100; // dimensione base
     cols = Math.max(1, Math.floor(canvas.width / blockSize));
     rows = Math.max(1, Math.floor(canvas.height / blockSize));
+      // Scala lo sticker in base alla larghezza della finestra
+    const scale = Math.max(0.5, Math.min(1, window.innerWidth / 1200));
+    sticker.style.transform = `scale(${scale})`;
   }
 
   function getAngle(cx, cy, mx, my) {
