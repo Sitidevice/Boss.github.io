@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cellH = canvas.height / rows;
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#e0e0e0";
+    ctx.fillStyle = "#ffdb36";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for (let r = 0; r < rows; r++) {
